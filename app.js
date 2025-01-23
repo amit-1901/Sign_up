@@ -5,9 +5,7 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
-  const confirmPassword = document
-    .getElementById("confirmPassword")
-    .value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
   // Error message elements
   const nameError = document.getElementById("nameError");
@@ -25,7 +23,7 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   let isValid = true;
 
   // Name validation
-  const namePattern = /^[a-zA-Z][a-zA-Z\s'-]{2,49}$/;  // Start with a letter, allow letters, spaces, hyphens, or apostrophes, and length between 3-50
+  const namePattern = /^[a-zA-Z][a-zA-Z\s'-]{2,49}$/; // Start with a letter, allow letters, spaces, hyphens, or apostrophes, and length between 3-50
   if (!name) {
     nameError.textContent = "Name is required.";
     isValid = false;
@@ -36,20 +34,19 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   }
 
   // Email validation
-  email = email.toLowerCase();  // chane it into lowercase
+  email = email.toLowerCase(); // chane it into lowercase
   if (!email) {
     emailError.textContent = "Email is required.";
     isValid = false;
   } else {
     // Standard email regex for validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  
+
     if (!emailPattern.test(email)) {
       emailError.textContent = "Please enter a valid email address.";
       isValid = false;
     }
   }
-   
 
   if (!password) {
     passwordError.textContent = "Password is required.";
