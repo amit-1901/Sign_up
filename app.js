@@ -34,14 +34,15 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   }
 
   // Email validation
-  email = email.toLowerCase(); // chane it into lowercase
+  // email = email.toLowerCase(); // chane it into lowercase
   if (!email) {
     emailError.textContent = "Email is required.";
-    isValid = false;
+    isValid = false;  
   } else {
     // Standard email regex for validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    // const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       emailError.textContent = "Please enter a valid email address.";
       isValid = false;
