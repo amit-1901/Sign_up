@@ -56,5 +56,6 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
     alert("Signup successful!");
     console.log({ name, email, password });
   }
-  // console.lof
+  
 });
+
