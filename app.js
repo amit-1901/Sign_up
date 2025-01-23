@@ -35,6 +35,8 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
     isValid = false;
   }
 
+  // Email validation
+  email = email.toLowerCase();  // chane it into lowercase
   if (!email) {
     emailError.textContent = "Email is required.";
     isValid = false;
