@@ -5,7 +5,9 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
-  const confirmPassword = document.getElementById("confirmPassword").value.trim();
+  const confirmPassword = document
+    .getElementById("confirmPassword")
+    .value.trim();
 
   // Error message elements
   const nameError = document.getElementById("nameError");
@@ -22,8 +24,14 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   // Validation
   let isValid = true;
 
+  // Name validation
+  const namePattern = /^[a-zA-Z][a-zA-Z\s'-]{2,49}$/;  // Start with a letter, allow letters, spaces, hyphens, or apostrophes, and length between 3-50
   if (!name) {
     nameError.textContent = "Name is required.";
+    isValid = false;
+  } else if (!namePattern.test(name)) {
+    nameError.textContent =
+      "Name must start with a letter, be 3-50 characters long, and contain only letters, spaces, hyphens, or apostrophes.";
     isValid = false;
   }
 
@@ -56,6 +64,4 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
     alert("Signup successful!");
     console.log({ name, email, password });
   }
-  
 });
-
