@@ -4,8 +4,13 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   // Get input values
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const confirmPassword = document.getElementById("confirmPassword").value.trim();
+  // const password = document.getElementById("password");
+  
+  const confirmPasswordInput = document.getElementById("confirmPassword").value;
+  const passwordInput = document.getElementById("password").value;
+  const password = passwordInput.trim();
+  const confirmPassword =confirmPasswordInput.trim();
+
 
   // Error message elements
   const nameError = document.getElementById("nameError");
@@ -41,33 +46,57 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   } else {
     // Standard email regex for validation
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    // const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       emailError.textContent = "Please enter a valid email address.";
       isValid = false;
     }
   }
 
+  // Password Validation
   if (!password) {
     passwordError.textContent = "Password is required.";
     isValid = false;
-  } else if (password.length < 6) {
-    passwordError.textContent = "Password must be at least 6 characters.";
+  } else if (passwordInput !== password) { // Check for leading/trailing spaces
+    passwordError.textContent = "Password should not have spaces at the beginning or end.";
+    isValid = false;
+  } else if (password.length < 8) {
+    passwordError.textContent = "Password must be at least 8 characters.";
+    isValid = false;
+  }  else if (!/[a-z]/.test(password)) {
+    passwordError.textContent = "Password must contain at least one lowercase letter.";
+    isValid = false;
+  } else if (!/[A-Z]/.test(password)) {
+    passwordError.textContent = "Password must contain at least one uppercase letter.";
+    isValid = false;
+  } else if (!/[0-9]/.test(password)) {
+    passwordError.textContent = "Password must contain at least one number.";
+    isValid = false;
+  } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    passwordError.textContent = "Password must contain at least one special character.";
+    isValid = false;
+  } else if (/\s/.test(password)) {
+    passwordError.textContent = "Password should not contain spaces.";
     isValid = false;
   }
-
+  
+  
   if (!confirmPassword) {
     confirmPasswordError.textContent = "Please confirm your password.";
+    isValid = false;
+  } else if (confirmPasswordInput !== confirmPassword) { // Check for leading/trailing spaces
+    confirmPasswordError.textContent = "Confirm Password should not have spaces at the beginning or end.";
     isValid = false;
   } else if (password !== confirmPassword) {
     confirmPasswordError.textContent = "Passwords do not match.";
     isValid = false;
   }
+  
 
   // If valid, show success message
   if (isValid) {
     alert("Signup successful!");
     console.log({ name, email, password });
+  } else {
+    alert("Please Try Again");
   }
 });
