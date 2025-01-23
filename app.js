@@ -38,10 +38,16 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   if (!email) {
     emailError.textContent = "Email is required.";
     isValid = false;
-  } else if (!/\S+@\S+\.\S+/.test(email)) {
-    emailError.textContent = "Please enter a valid email.";
-    isValid = false;
+  } else {
+    // Standard email regex for validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+    if (!emailPattern.test(email)) {
+      emailError.textContent = "Please enter a valid email address.";
+      isValid = false;
+    }
   }
+   
 
   if (!password) {
     passwordError.textContent = "Password is required.";
